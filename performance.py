@@ -46,6 +46,22 @@ Traceback (most recent call last):
 IndexError: list index out of range
 """
 
+"""
+Traceback (most recent call last):
+  File "/kaggle/working/s/train_segment.py", line 34, in <module>
+    Seg.train()
+  File "/kaggle/working/s/segment.py", line 294, in train
+    m_dice = self.invalid(epoch)
+  File "/kaggle/working/s/segment.py", line 325, in invalid
+    m_dice, m_iou, m_precision, m_recall = performance.save_performance_to_csv(
+  File "/kaggle/working/s/performance.py", line 160, in save_performance_to_csv
+    analysis_pd = analysis_pd.append({
+  File "/opt/conda/lib/python3.10/site-packages/pandas/core/generic.py", line 6296, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'DataFrame' object has no attribute 'append'. Did you mean: '_append'?
+add Codeadd Markdown
+"""
+
 def prepro_image(img_path, img_resize, threshold=128):
     image = cv.imread(img_path, 0)
     if len(image.shape) != 2:
@@ -157,7 +173,7 @@ def save_performance_to_csv(pred_dir, gt_dir, img_resize, csv_save_name, csv_sav
     analysis_pd = pd.DataFrame(columns=[
         'm_accu', 'm_prec', 'm_recall', 'm_iou', 'm_dice', 'm_voe', 'm_rvd', 'm_spec'
     ])
-    analysis_pd = analysis_pd.append({
+    analysis_pd = analysis_pd._append({
         'm_accu': m_accuracy, 'm_prec': m_precision, 'm_recall': m_recall, 'm_iou': m_iou,
         'm_dice': m_dice, 'm_voe': m_voe, 'm_rvd': m_rvd, 'm_spec': m_spec,
     }, ignore_index=True)
