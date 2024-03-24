@@ -26,7 +26,7 @@ if __name__ == '__main__':
         invalid_record_name='DataSet_Valid',
         invalid_volume_dir='record',
 
-        gt_mask_dir = 'masks_jpg',
+        gt_mask_dir = 'masks_jpg_valid',
     )
 
     Seg = segment.Segmentation(args)
