@@ -11,7 +11,27 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 import matplotlib.pyplot as plt
-
+"""
+Traceback (most recent call last):
+  File "/kaggle/working/s/train_segment.py", line 34, in <module>
+    Seg.train()
+  File "/kaggle/working/s/segment.py", line 294, in train
+    m_dice = self.invalid(epoch)
+  File "/kaggle/working/s/segment.py", line 325, in invalid
+    m_dice, m_iou, m_precision, m_recall = performance.save_performance_to_csv(
+  File "/kaggle/working/s/performance.py", line 100, in save_performance_to_csv
+    TP, TN, FP, FN, accuracy, precision, recall, IOU, DICE, VOE, RVD, specificity = calc_performance(
+  File "/kaggle/working/s/performance.py", line 70, in calc_performance
+    pred_image = prepro_image(pred_path, img_resize, threshold)
+  File "/kaggle/working/s/performance.py", line 22, in prepro_image
+    bin_image = np.array(bin_image / 255, dtype=np.int)
+  File "/opt/conda/lib/python3.10/site-packages/numpy/__init__.py", line 324, in __getattr__
+    raise AttributeError(__former_attrs__[attr])
+AttributeError: module 'numpy' has no attribute 'int'.
+`np.int` was a deprecated alias for the builtin `int`. To avoid this error in existing code, use `int` by itself. Doing this will not modify any behavior and is safe. When replacing `np.int`, you may wish to use e.g. `np.int64` or `np.int32` to specify the precision. If you wish to review your current use, check the release note link for additional information.
+The aliases was originally deprecated in NumPy 1.20; for more details and guidance see the original release note at:
+    https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations. Did you mean: 'inf'?
+"""
 
 def prepro_image(img_path, img_resize, threshold=128):
     image = cv.imread(img_path, 0)
@@ -19,36 +39,36 @@ def prepro_image(img_path, img_resize, threshold=128):
         image = cv.cvtColor(image, cv.COLOR_RGB2GRAY)
     image = cv.resize(image, img_resize)
     _, bin_image = cv.threshold(image, threshold, 255, cv.THRESH_BINARY)
-    bin_image = np.array(bin_image / 255, dtype=np.int)
+    bin_image = np.array(bin_image / 255, dtype=int)
     return bin_image
 
 
 def true_positive(pred, gt):
     assert pred.shape == gt.shape
     tp_bool = np.logical_and(pred, gt)
-    tp_int = np.array(tp_bool, dtype=np.int)
+    tp_int = np.array(tp_bool, dtype=int)
     tp = np.sum(tp_int)
     return tp
 
 
 def true_negative(pred, gt):
     assert pred.shape == gt.shape
-    no_pred = np.array(np.logical_not(pred), dtype=np.int)
-    no_gt = np.array(np.logical_not(gt), dtype=np.int)
+    no_pred = np.array(np.logical_not(pred), dtype=int)
+    no_gt = np.array(np.logical_not(gt), dtype=int)
     tn = true_positive(no_pred, no_gt)
     return tn
 
 
 def false_positive(pred, gt):
     assert pred.shape == gt.shape
-    no_gt = np.array(np.logical_not(gt), dtype=np.int)
+    no_gt = np.array(np.logical_not(gt), dtype=int)
     fp = true_positive(pred, no_gt)
     return fp
 
 
 def false_negative(pred, gt):
     assert pred.shape == gt.shape
-    no_pred = np.array(np.logical_not(pred), dtype=np.int)
+    no_pred = np.array(np.logical_not(pred), dtype=int)
     fn = true_positive(no_pred, gt)
     return fn
 
