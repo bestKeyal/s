@@ -11,6 +11,16 @@ import pandas as pd
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 
+# Traceback (most recent call last):
+#   File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/train_segment.py", line 34, in <module>
+#     Seg.train()
+#   File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/segment.py", line 283, in train
+#     m_dice = self.invalid(epoch)
+#   File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/segment.py", line 310, in invalid
+#     utils.crop_image(epoch_pred_save_dir, epoch_cropped_save_dir,
+#   File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/utils.py", line 48, in crop_image
+#     file_paths_list = get_file_path(read_dir)
+# NameError: name 'get_file_path' is not defined. Did you mean: 'file_path'?
 
 def get_path(file_dir):
     path_list = []
@@ -45,7 +55,7 @@ def crop_image(read_dir, save_dir, o_w, o_h, r_w, r_h, split=False):
 
     # Crop large images into small images
     i = 0
-    file_paths_list = get_file_path(read_dir)
+    file_paths_list = get_path(read_dir)
     for file_path in file_paths_list:
         for row in range(o_h // r_h):
             for col in range(o_w // r_w):
