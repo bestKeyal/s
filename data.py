@@ -219,7 +219,15 @@ def get_test_data(test_data_path, image_shape, image_nums=16):
 if __name__ == '__main__':
     # masks_path = r'D:\Pycharm_Projects\mkm\physionet.org-20240323T163801Z-001\physionet.org\files\ct-ich\1.3.1\masks_jpg'
     # images_path = r'D:\Pycharm_Projects\mkm\physionet.org-20240323T163801Z-001\physionet.org\files\ct-ich\1.3.1\ct_scans_jpg'
-    # make_data((256, 256), images_path, masks_path, 'DataSet', '')
 
-    dataset = get_tfrecord_data('DataSet', 'DataSet', (256, 256,), batch_size=32)
-    print(dataset)
+    m_train = r'D:\Pycharm_Projects\mkm\physionet.org-20240323T163801Z-001\physionet.org\files\ct-ich\1.3.1\masks_jpg_train'
+    ct_train = r'D:\Pycharm_Projects\mkm\physionet.org-20240323T163801Z-001\physionet.org\files\ct-ich\1.3.1\ct_scans_jpg_train'
+    make_data((256, 256), ct_train, m_train, 'DataSet_Train', '')
+
+    m_valid = r'D:\Pycharm_Projects\mkm\physionet.org-20240323T163801Z-001\physionet.org\files\ct-ich\1.3.1\masks_jpg_valid'
+    ct_valid = r'D:\Pycharm_Projects\mkm\physionet.org-20240323T163801Z-001\physionet.org\files\ct-ich\1.3.1\ct_scans_jpg_valid'
+
+    make_data((256, 256), ct_valid, m_valid, 'DataSet_Valid', '')
+
+    # dataset = get_tfrecord_data('DataSet', 'DataSet', (256, 256,), batch_size=32)
+    # print(dataset)
