@@ -14,15 +14,19 @@ if __name__ == '__main__':
         channel=1,
         pred_height=1024,
         pred_width=1024,
-        total_samples=75,
-        invalid_samples=0,
+        total_samples=2814,
+        invalid_samples=282,
         regularize=False,
-        record_dir='',
-        train_record_name='DataSet',
+
+        record_dir='record',
+        train_record_name='DataSet_Train',
+
         test_image_dir='test-images',
-        invalid_record_name='',
-        gt_mask_dir='',
-        invalid_volume_dir=''
+
+        invalid_record_name='DataSet_Valid',
+        invalid_volume_dir='record',
+
+        gt_mask_dir = 'masks_jpg',
     )
 
     Seg = segment.Segmentation(args)

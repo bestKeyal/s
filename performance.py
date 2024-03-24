@@ -100,7 +100,7 @@ def save_performance_to_csv(pred_dir, gt_dir, img_resize, csv_save_name, csv_sav
         TP, TN, FP, FN, accuracy, precision, recall, IOU, DICE, VOE, RVD, specificity = calc_performance(
             pred_paths[file_index], gt_paths[file_index], img_resize, threshold)
 
-        record_pd = record_pd.append({
+        record_pd = record_pd._append({
             'pred_name': pred_names[file_index],
             'gt_name': gt_names[file_index],
             'accuracy': accuracy,
