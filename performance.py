@@ -129,7 +129,9 @@ def save_performance_to_csv(pred_dir, gt_dir, img_resize, csv_save_name, csv_sav
     ])
 
     total_file_nums = len(gt_paths)
+    pred_file_nums = len(pred_paths)
     for file_index in tqdm(range(total_file_nums), total=total_file_nums):
+        if file_index == pred_file_nums: break
         TP, TN, FP, FN, accuracy, precision, recall, IOU, DICE, VOE, RVD, specificity = calc_performance(
             pred_paths[file_index], gt_paths[file_index], img_resize, threshold)  # TODO 修复这里的BUG
 
