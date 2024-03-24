@@ -15,7 +15,7 @@ if __name__ == '__main__':
         pred_height=1024,
         pred_width=1024,
         total_samples=2814,
-        invalid_samples=282,
+        invalid_samples=272,
         regularize=False,
 
         record_dir='record',
