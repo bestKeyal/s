@@ -23,6 +23,7 @@ Traceback (most recent call last):
 NameError: name 'get_file_path' is not defined. Did you mean: 'file_path'?
 
 """
+
 """
 Traceback (most recent call last):
   File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/DR-UNet-Suited/train_segment.py", line 34, in <module>
@@ -39,6 +40,21 @@ Traceback (most recent call last):
     path_list = sorted(path_list, key=lambda path_: int(pathlib.Path(path_).stem))
 ValueError: invalid literal for int() with base 10: 'Segment_train_pred_10'
 """
+
+"""
+Traceback (most recent call last):
+  File "/kaggle/working/s/train_segment.py", line 34, in <module>
+    Seg.train()
+  File "/kaggle/working/s/segment.py", line 283, in train
+    m_dice = self.invalid(epoch)
+  File "/kaggle/working/s/segment.py", line 310, in invalid
+    utils.crop_image(epoch_pred_save_dir, epoch_cropped_save_dir,
+  File "/kaggle/working/s/utils.py", line 95, in crop_image
+    img = cv.imread(file_path)
+TypeError: Can't convert object to 'str' for 'filename'
+
+"""
+
 import pathlib
 import re
 
@@ -88,7 +104,7 @@ def crop_image(read_dir, save_dir, o_w, o_h, r_w, r_h, split=False):
 
     # Crop large images into small images
     i = 0
-    file_paths_list = get_path(read_dir)
+    file_paths_list = os.listdir(read_dir)
     for file_path in file_paths_list:
         for row in range(o_h // r_h):
             for col in range(o_w // r_w):
