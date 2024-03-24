@@ -81,10 +81,12 @@ def extract_number_at_end(filename):
         return float('inf')  # 没有数字，则返回无穷大
 
 
-def get_path(file_dir):
+def get_path(file_dir, need_img=False):
     path_list = []
     name_list = []
     for path in pathlib.Path(file_dir).iterdir():
+        if need_img and not (str(path).endswith('.jpg') or str(path).endswith('.png')):
+            continue
         path_list.append(str(path))
         name_list.append(path.name)
 

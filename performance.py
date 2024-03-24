@@ -155,8 +155,8 @@ def calc_performance(pred_path, gt_path, img_resize, threshold=128):
 
 
 def save_performance_to_csv(pred_dir, gt_dir, img_resize, csv_save_name, csv_save_path='', threshold=128):
-    gt_paths, gt_names = utils.get_path(gt_dir)
-    pred_paths, pred_names = utils.get_path(pred_dir)
+    gt_paths, gt_names = utils.get_path(gt_dir, need_img=True)
+    pred_paths, pred_names = utils.get_path(pred_dir, need_img=True)
 
     record_pd = pd.DataFrame(columns=[
         'pred_name', 'gt_name', 'TP', 'FP', 'FN', 'TN',
