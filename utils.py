@@ -10,17 +10,47 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 import matplotlib.pyplot as plt
+"""
+Traceback (most recent call last):
+  File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/train_segment.py", line 34, in <module>
+    Seg.train()
+  File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/segment.py", line 283, in train
+    m_dice = self.invalid(epoch)
+  File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/segment.py", line 310, in invalid
+    utils.crop_image(epoch_pred_save_dir, epoch_cropped_save_dir,
+  File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/utils.py", line 48, in crop_image
+    file_paths_list = get_file_path(read_dir)
+NameError: name 'get_file_path' is not defined. Did you mean: 'file_path'?
 
-# Traceback (most recent call last):
-#   File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/train_segment.py", line 34, in <module>
-#     Seg.train()
-#   File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/segment.py", line 283, in train
-#     m_dice = self.invalid(epoch)
-#   File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/segment.py", line 310, in invalid
-#     utils.crop_image(epoch_pred_save_dir, epoch_cropped_save_dir,
-#   File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/utils.py", line 48, in crop_image
-#     file_paths_list = get_file_path(read_dir)
-# NameError: name 'get_file_path' is not defined. Did you mean: 'file_path'?
+"""
+"""
+Traceback (most recent call last):
+  File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/DR-UNet-Suited/train_segment.py", line 34, in <module>
+    Seg.train()
+  File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/DR-UNet-Suited/segment.py", line 283, in train
+    m_dice = self.invalid(epoch)
+  File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/DR-UNet-Suited/segment.py", line 310, in invalid
+    utils.crop_image(epoch_pred_save_dir, epoch_cropped_save_dir,
+  File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/DR-UNet-Suited/utils.py", line 58, in crop_image
+    file_paths_list = get_path(read_dir)
+  File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/DR-UNet-Suited/utils.py", line 31, in get_path
+    path_list = sorted(path_list, key=lambda path_: int(pathlib.Path(path_).stem))
+  File "/kaggle/working/DR-UNet-Suited/DR-UNet-Suited/DR-UNet-Suited/utils.py", line 31, in <lambda>
+    path_list = sorted(path_list, key=lambda path_: int(pathlib.Path(path_).stem))
+ValueError: invalid literal for int() with base 10: 'Segment_train_pred_10'
+"""
+import pathlib
+import re
+
+
+def extract_number_at_end(filename):
+    # 正则表达式匹配文件名末尾的数字
+    match = re.search(r'(\d+)(?!.*\d)', filename)
+    if match:
+        return int(match.group(0))  # 匹配的数字部分
+    else:
+        return float('inf')  # 没有数字，则返回无穷大
+
 
 def get_path(file_dir):
     path_list = []
@@ -28,8 +58,11 @@ def get_path(file_dir):
     for path in pathlib.Path(file_dir).iterdir():
         path_list.append(str(path))
         name_list.append(path.name)
-    path_list = sorted(path_list, key=lambda path_: int(pathlib.Path(path_).stem))
-    name_list = sorted(name_list, key=lambda path_: int(pathlib.Path(path_).stem))
+
+    # 辅助函数作为key来对路径列表进行排序
+    path_list = sorted(path_list, key=lambda path_: extract_number_at_end(pathlib.Path(path_).stem))
+    name_list = sorted(name_list, key=lambda name_: extract_number_at_end(name_))
+
     return path_list, name_list
 
 
