@@ -85,7 +85,7 @@ def get_path(file_dir):
     path_list = []
     name_list = []
     for path in pathlib.Path(file_dir).iterdir():
-        path_list.append(os.path.join(file_dir, str(path)))
+        path_list.append(str(path))
         name_list.append(path.name)
 
     # 辅助函数作为key来对路径列表进行排序
