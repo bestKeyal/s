@@ -42,6 +42,9 @@ def reverse_pred_image(normalize_pred_image):
 
 
 def save_images(pred, index, save_path, image_shape, split=False):
+    if not os.path.exists(save_path):
+        os.mkdir(save_path)
+
     image_numbers = int(np.sqrt(pred.shape[0]))
     if not split:
         h = image_shape[0]

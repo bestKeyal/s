@@ -297,6 +297,7 @@ class Segmentation:
                 tqdm.tqdm(invalid_data, total=self.params.invalid_samples // self.params.batch_size + 1)):
             invalid_pred = self.inference(invalid_image)
             epoch_pred_save_dir = os.path.join(self.pred_invalid_save_dir, f'epoch_{epoch}')
+            
             module.save_images(
                 image_shape=self.mask_shape, pred=invalid_pred,
                 save_path=epoch_pred_save_dir, index=f'{index}', split=False
