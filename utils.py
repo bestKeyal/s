@@ -54,6 +54,19 @@ Traceback (most recent call last):
 TypeError: Can't convert object to 'str' for 'filename'
 
 """
+"""
+Traceback (most recent call last):
+  File "/kaggle/working/s/train_segment.py", line 34, in <module>
+    Seg.train()
+  File "/kaggle/working/s/segment.py", line 283, in train
+    m_dice = self.invalid(epoch)
+  File "/kaggle/working/s/segment.py", line 310, in invalid
+    utils.crop_image(epoch_pred_save_dir, epoch_cropped_save_dir,
+  File "/kaggle/working/s/utils.py", line 112, in crop_image
+    cropped = img[row * r_h: (row + 1) * r_h, col * r_w: (col + 1) * r_w, :]
+TypeError: 'NoneType' object is not subscriptable
+
+"""
 
 import pathlib
 import re
@@ -105,7 +118,9 @@ def crop_image(read_dir, save_dir, o_w, o_h, r_w, r_h, split=False):
     # Crop large images into small images
     i = 0
     file_paths_list = os.listdir(read_dir)
-    for file_path in file_paths_list:
+    for file_name in file_paths_list:
+        file_path = os.path.join(read_dir, file_name)
+
         for row in range(o_h // r_h):
             for col in range(o_w // r_w):
                 img = cv.imread(file_path)
