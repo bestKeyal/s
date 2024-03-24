@@ -151,6 +151,7 @@ def calc_performance(pred_path, gt_path, img_resize, threshold=128):
     voe = 1 - tp / (tp + fn + fp + 1e-10)
     rvd = (fp - fn) / (fn + tp + 1e-10)
     specificity = tn / (tn + fp + 1e-10)
+
     return tp, tn, fp, fn, accuracy, precision, recall, iou, dice, voe, rvd, specificity
 
 

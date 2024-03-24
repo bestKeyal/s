@@ -48,7 +48,6 @@ parser.add_argument('--gt-mask-dir', default=r'', type=str, help='the ground tru
 parser.add_argument('--invalid-volume-dir', default=r'', type=str, help='estimation bleeding volume')
 args = parser.parse_args()
 
-
 """
 Traceback (most recent call last):
   File "/kaggle/working/s/train_segment.py", line 34, in <module>
@@ -59,6 +58,7 @@ Traceback (most recent call last):
     m_dice, m_iou, m_precision, m_recall = performance.save_performace_to_csv(
 AttributeError: module 'performance' has no attribute 'save_performace_to_csv'. Did you mean: 'save_performance_to_csv'?
 """
+
 
 class Segmentation:
     def __init__(self, params):
@@ -182,7 +182,7 @@ class Segmentation:
                 drawed_images.append(drawed_image)
                 blood_areas.append(blood_area)
                 pd_record = pd_record._append({'image_name': image_names[index], 'Square Centimeter': blood_area},
-                                             ignore_index=True)
+                                              ignore_index=True)
 
             one_pred_save_dir = os.path.join(save_pred_images_dir, file_name)
             module.save_invalid_data(ori_images, drawed_images, denorm_pred_mask,
@@ -256,6 +256,7 @@ class Segmentation:
         train_data = data.get_tfrecord_data(
             self.params.record_dir, self.params.train_record_name,
             self.input_shape, batch_size=self.params.batch_size)
+
         self.load_model()
 
         pd_record = pd.DataFrame(columns=['Epoch', 'Iteration', 'Loss', 'Time'])
@@ -274,9 +275,14 @@ class Segmentation:
                 # training step
                 train_loss = self.train_step(train_image, gt_mask)
                 if iteration % 100 == 0:
-                    print('Epoch: {}, Iteration: {}, Loss: {:.2f}, Time: {:.2f} s'.format(
-                        epoch, iteration, train_loss, time.time() - start_time))
+                    from colorama import Fore, Style
 
+                    # ANSI转义序列
+                    RED = "\033[1;31m"
+                    RESET = "\033[0;0m"
+                    print(RED + 'Epoch: {}, Iteration: {}, Loss: {:.2f}, Time: {:.2f} s'.format(epoch, iteration,
+                                                                                                train_loss,
+                                                                                                time.time() - start_time) + RESET)
                     # test step
                     test_pred = self.inference(norm_test_image)
                     module.save_images(
@@ -329,4 +335,3 @@ class Segmentation:
             csv_save_path=epoch_cropped_save_dir
         )
         return m_dice
-

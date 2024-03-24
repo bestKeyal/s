@@ -65,6 +65,7 @@ class TFData:
             self.mask_name, self.mask_list = get_path_name(self.mask_dir, False)
             self.data_zip = zip(self.image_list, self.mask_list)
 
+
     def image_to_byte(self, path, gray_scale):
         image = cv.imread(path)
         if not gray_scale:
@@ -86,6 +87,8 @@ class TFData:
 
             print(len(self.image_list))
             for image_path, mask_path in tqdm.tqdm(self.data_zip, total=len(self.image_list)):
+                if image_path.split('\\')[-1] != mask_path.split('\\')[-1]:
+                    raise  Exception('图片和掩码的名称不对应！！！')
                 image = self.image_to_byte(image_path, self.image_gray)
                 mask = self.image_to_byte(mask_path, self.mask_gray)
 

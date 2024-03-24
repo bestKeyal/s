@@ -14,8 +14,8 @@ if __name__ == '__main__':
         channel=1,
         pred_height=1024,
         pred_width=1024,
-        total_samples=2814,
-        invalid_samples=272,
+        total_samples=2532 + 282,
+        invalid_samples=282,
         regularize=False,
 
         record_dir='record',
