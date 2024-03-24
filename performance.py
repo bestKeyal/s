@@ -62,6 +62,23 @@ AttributeError: 'DataFrame' object has no attribute 'append'. Did you mean: '_ap
 add Codeadd Markdown
 """
 
+"""
+Traceback (most recent call last):
+  File "/kaggle/working/s/train_segment.py", line 34, in <module>
+    Seg.train()
+  File "/kaggle/working/s/segment.py", line 294, in train
+    m_dice = self.invalid(epoch)
+  File "/kaggle/working/s/segment.py", line 325, in invalid
+    m_dice, m_iou, m_precision, m_recall = performance.save_performance_to_csv(
+  File "/kaggle/working/s/performance.py", line 151, in save_performance_to_csv
+    TP, TN, FP, FN, accuracy, precision, recall, IOU, DICE, VOE, RVD, specificity = calc_performance(
+  File "/kaggle/working/s/performance.py", line 119, in calc_performance
+    pred_image = prepro_image(pred_path, img_resize, threshold)
+  File "/kaggle/working/s/performance.py", line 67, in prepro_image
+    if len(image.shape) != 2:
+AttributeError: 'NoneType' object has no attribute 'shape'
+"""
+
 def prepro_image(img_path, img_resize, threshold=128):
     image = cv.imread(img_path, 0)
     if len(image.shape) != 2:
