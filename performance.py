@@ -80,6 +80,8 @@ AttributeError: 'NoneType' object has no attribute 'shape'
 """
 
 def prepro_image(img_path, img_resize, threshold=128):
+
+    print("prepro image\n img_path: ", img_path)
     image = cv.imread(img_path, 0)
     if len(image.shape) != 2:
         image = cv.cvtColor(image, cv.COLOR_RGB2GRAY)
