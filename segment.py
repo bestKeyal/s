@@ -49,6 +49,17 @@ parser.add_argument('--invalid-volume-dir', default=r'', type=str, help='estimat
 args = parser.parse_args()
 
 
+"""
+Traceback (most recent call last):
+  File "/kaggle/working/s/train_segment.py", line 34, in <module>
+    Seg.train()
+  File "/kaggle/working/s/segment.py", line 283, in train
+    m_dice = self.invalid(epoch)
+  File "/kaggle/working/s/segment.py", line 314, in invalid
+    m_dice, m_iou, m_precision, m_recall = performance.save_performace_to_csv(
+AttributeError: module 'performance' has no attribute 'save_performace_to_csv'. Did you mean: 'save_performance_to_csv'?
+"""
+
 class Segmentation:
     def __init__(self, params):
         self.params = params
@@ -311,7 +322,7 @@ class Segmentation:
                          self.crop_width, self.crop_height,
                          self.input_shape[0], self.input_shape[1]
                          )
-        m_dice, m_iou, m_precision, m_recall = performance.save_performace_to_csv(
+        m_dice, m_iou, m_precision, m_recall = performance.save_performance_to_csv(
             pred_dir=epoch_cropped_save_dir, gt_dir=self.params.gt_mask_dir,
             img_resize=(self.params.height, self.params.width),
             csv_save_name=f'{self.model_name}_epoch_{epoch}',
