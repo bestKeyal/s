@@ -72,7 +72,7 @@ class Segmentation:
 
         # Obtain a segmentation model
         self.seg_model = dr_unet.dr_unet(input_shape=self.input_shape, dims=params.dims)
-        self.seg_model.summary()
+        # self.seg_model.summary()
 
         # Optimization function
         self.optimizer = tf.keras.optimizers.Adam(lr=params.lr)
