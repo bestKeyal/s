@@ -223,12 +223,12 @@ if __name__ == '__main__':
     # masks_path = r'D:\Pycharm_Projects\mkm\physionet.org-20240323T163801Z-001\physionet.org\files\ct-ich\1.3.1\masks_jpg'
     # images_path = r'D:\Pycharm_Projects\mkm\physionet.org-20240323T163801Z-001\physionet.org\files\ct-ich\1.3.1\ct_scans_jpg'
 
-    m_train = r'D:\Pycharm_Projects\mkm\physionet.org-20240323T163801Z-001\physionet.org\files\ct-ich\1.3.1\masks_jpg_train'
-    ct_train = r'D:\Pycharm_Projects\mkm\physionet.org-20240323T163801Z-001\physionet.org\files\ct-ich\1.3.1\ct_scans_jpg_train'
+    m_train = r'D:\Pycharm_Projects\mkm\dr-unet\dr-unet\masks_jpg_train'
+    ct_train = r'D:\Pycharm_Projects\mkm\dr-unet\dr-unet\ct_scans_jpg_train'
     make_data((256, 256), ct_train, m_train, 'DataSet_Train', '')
 
-    m_valid = r'D:\Pycharm_Projects\mkm\physionet.org-20240323T163801Z-001\physionet.org\files\ct-ich\1.3.1\masks_jpg_valid'
-    ct_valid = r'D:\Pycharm_Projects\mkm\physionet.org-20240323T163801Z-001\physionet.org\files\ct-ich\1.3.1\ct_scans_jpg_valid'
+    m_valid = r'D:\Pycharm_Projects\mkm\dr-unet\dr-unet\masks_jpg_valid'
+    ct_valid = r'D:\Pycharm_Projects\mkm\dr-unet\dr-unet\ct_scans_jpg_valid'
 
     make_data((256, 256), ct_valid, m_valid, 'DataSet_Valid', '')
 
